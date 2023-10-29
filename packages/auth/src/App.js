@@ -14,7 +14,7 @@ const generateClassName = createGenerateClassName({
 
 const App = ({ history, onSignIn }) => {
   return (
-    <div>
+    <div className="hehe">
       <StylesProvider generateClassName={generateClassName}>
         <Router history={history}>
           <Switch>
