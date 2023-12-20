@@ -1,8 +1,9 @@
 import { mount } from 'auth/AuthApp';
 import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
+import queryClient from '../queryClient';
 
-export default ({ onSignIn }) => {
+export default ({ onSignIn,queryClient }) => {
   const ref = useRef(null);
   const history = useHistory();
 
@@ -17,6 +18,7 @@ export default ({ onSignIn }) => {
         }
       },
       onSignIn,
+      queryClient,
     });
 
     history.listen(onParentNavigate);

@@ -4,16 +4,21 @@ import {
   StylesProvider,
   createGenerateClassName,
 } from '@material-ui/core/styles';
-
+// import { QueryClientProvider } from 'react-query';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
+import { QueryClientProvider } from 'react-query';
+import queryClient from '../../container/src/queryClient';
 
 const generateClassName = createGenerateClassName({
   productionPrefix: 'au',
 });
 
 const App = ({ history, onSignIn }) => {
+  console.log('Identity of queryClient in auth/App.js:', queryClient);
+
   return (
+    <QueryClientProvider client={queryClient}>
     <div className="hehe">
       <StylesProvider generateClassName={generateClassName}>
         <Router history={history}>
@@ -25,9 +30,11 @@ const App = ({ history, onSignIn }) => {
               <Signup onSignIn={onSignIn} />
             </Route>
           </Switch>
+          <UserList /> 
         </Router>
       </StylesProvider>
     </div>
+    </QueryClientProvider>
   );
 };
 

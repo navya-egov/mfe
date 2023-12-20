@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { createMemoryHistory, createBrowserHistory } from 'history';
-
+// import {queryClient} from 'container/src/queryClient';
+import { QueryClientProvider } from 'react-query';
+// import queryClient from '../../container/src/queryClient';
 //mount fn to startup the app
-const mount = (el, { onNavigate, defaultHistory, initialPath, onSignIn }) => {
+const mount = (el, { onNavigate, defaultHistory, initialPath, onSignIn,queryClient }) => {
   const history =
     defaultHistory ||
     createMemoryHistory({
@@ -13,7 +15,12 @@ const mount = (el, { onNavigate, defaultHistory, initialPath, onSignIn }) => {
   if (onNavigate) {
     history.listen(onNavigate);
   }
-  ReactDOM.render(<App history={history} onSignIn={onSignIn} />, el);
+  ReactDOM.render(
+  <QueryClientProvider client={queryClient}>
+  <App history={history} onSignIn={onSignIn} />,
+  </QueryClientProvider>,
+   el
+   );
 
   return {
     onParentNavigate({ pathname: nextPathname }) {

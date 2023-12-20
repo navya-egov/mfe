@@ -19,6 +19,10 @@ const prodConfig = {
         auth: `auth@${domain}/auth/latest/remoteEntry.js`,
         dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`,
       },
+      exposes: {
+        './queryClient': '../src/queryClient.js',
+        // './host': '../../host/src/index.js',
+      },
       shared: packageJson.dependencies,
     }),
   ],
